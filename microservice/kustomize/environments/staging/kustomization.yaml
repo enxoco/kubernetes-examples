@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+namePrefix: staging
+namespace: example
+commonLabels:
+  env: staging
+patchesStrategicMerge:
+- frontend-deployment.yaml
+configMapGenerator:
+- behavior: create
+  files:
+  - files/default.conf
+  name: staging-nginx-conf
+images:
+- name: enxo/example-backend
+  newTag: staging

@@ -1,0 +1,18 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+- ../../base
+namePrefix: production
+namespace: example
+commonLabels:
+  env: production
+patchesStrategicMerge:
+- frontend-deployment.yaml
+configMapGenerator:
+- behavior: create
+  files:
+  - files/default.conf
+  name: production-nginx-conf
+images:
+- name: enxo/example-backend
+  newTag: production
