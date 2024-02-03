@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: staging-backend
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      tier: backend
+      track: stable
+      env: staging
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: backend
+        track: stable
+        env: staging
+    spec:
+      containers:
+        - name: hello
+          image: "example-backend:staging"
+          ports:
+            - name: http
+              containerPort: 80
+...

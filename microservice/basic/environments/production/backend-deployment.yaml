@@ -1,0 +1,28 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: prodbackend
+spec:
+  selector:
+    matchLabels:
+      app: hello
+      tier: backend
+      track: stable
+      env: production
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: hello
+        tier: backend
+        track: stable
+        env: production
+    spec:
+      containers:
+        - name: hello
+          image: "example-backend:production"
+          ports:
+            - name: http
+              containerPort: 80
+...

@@ -1,0 +1,15 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: staging-hello
+spec:
+  selector:
+    app: hello
+    tier: backend
+    env: staging
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: http
+...
